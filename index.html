@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jquery.min.js"></script>
+    <script src="./nunjucks.js"></script>
+
+</head>
+
+<body>
+
+    <h3>渲染数组</h3>
+    <ul id="ulone">
+    </ul>
+    <script type="text/html" id="temp1">
+            {% for item in list %}
+               <li>{{item}}</li>     
+            {% endfor %}
+
+    </script>
+
+    <h4>渲染数组对象</h4>
+    <ul id="ulthree"></ul>
+    <script type="text/html" id="temp3">
+        {% for item in userdata %}
+        <li>{{item.username}}</li>
+        {% endfor %}
+</script>
+
+    <script>
+        let env = nunjucks.configure({ autoescape: true });
+
+        // let item3 = ['张三', '赵四', '王五']
+
+        // let str1 = env.renderString($('#ulone').html(), { item3 });
+        // $('#temp1').append(str1);
+
+        let userdata = [
+            { username: 'jack', paw: "123" },
+            { username: 'rose', paw: "123" },
+            { username: 'dasf', paw: "123" },
+        ]
+        let str2 = env.renderString($('#temp3').html(), { userdata });
+        console.log(str2);
+        $('#ulthree').append(str2);
+
+    </script>
+
+</body>
+
+</html>
